@@ -23,10 +23,10 @@ class Burger
         private ?Pain $pain = null;
 
         #[ORM\ManyToMany(targetEntity: Oignon::class)]
-        private ?Oignon $oignons;
+        private ?Oignon $oignons = null;
 
         #[ORM\ManyToMany(targetEntity: Sauce::class)]
-        private ?Sauce $sauces;
+        private ?Sauce $sauces = null;
 
         #[ORM\OneToOne(targetEntity: Image::class, cascade: ['persist', 'remove'])]
         private ?Image $image = null;

@@ -27,6 +27,7 @@ public function create(EntityManagerInterface $entityManager): Response
 {
     $image = new Image();
     $image->setUrl('image.jpg'); // Exemple de valeur
+    $image->setName('Nom de l\'image');
     $entityManager->persist($image);
     $entityManager->flush();
     return new Response('Image créée avec succès !');

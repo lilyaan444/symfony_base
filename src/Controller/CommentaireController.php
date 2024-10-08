@@ -28,6 +28,7 @@ public function create(EntityManagerInterface $entityManager): Response
     $commentaire = new Commentaire();
     $commentaire->setAuteur('John Doe'); // Exemple de valeur
     $commentaire->setContenu('Super burger !'); // Exemple de valeur
+    $commentaire->setName("Premier"); // Associez le burger au commentaire
     // ... (autres propriétés du commentaire)
     $entityManager->persist($commentaire);
     $entityManager->flush();
