@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des oignons{% endblock %}
+{% block body %}
+    <h1>Liste des oignons</h1>
+
+    <p>Vérification de la variable oignons :</p>
+    {{ oignons|length }} oignons trouvés.
+
+    <ul>
+        {% for oignon in oignons %}
+            <li>{{ oignon.name }}</li>
+        {% else %}
+            <li>Aucune oignon trouvé.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

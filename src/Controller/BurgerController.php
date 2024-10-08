@@ -1,43 +1,39 @@
 <?php
+
 namespace App\Controller;
 
+use App\Repository\BurgerRepository; // Importez le repository
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Burger;
+
 
 class BurgerController extends AbstractController
 {
-    #[Route('/burgers', name: 'app_burgers_list')]
-    public function list(): Response
+    #[Route('/burgers', name: 'burger_index')]
+    public function index(BurgerRepository $burgerRepository): Response
     {
-        return $this->render('burgers_list.html.twig');
-    }
+        // Récupérer tous les burgers
+        $burgers = $burgerRepository->findAll();
 
-    #[Route('/burgers/{id}', name: 'show_burger')]
-    public function show(int $id):  Response
-    {
-        // Simulation d'une base de données de burgers
-        $burgers = [
-            1 => [
-                'name' => 'Le Classique',
-                'description' => 'Steak haché, cheddar, tomate, oignon, salade',
-                'price' => 9.99
-            ],
-            2 => [
-                'name' => 'Le Veggie',
-                'description' => 'Galette de légumes, cheddar vegan, tomate, oignon, salade',
-                'price' => 10.99
-            ],
-            3 => [
-                'name' => 'Le Spicy',
-                'description' => 'Steak haché, cheddar, jalapeños, oignon rouge, sauce épicée',
-                'price' => 11.99
-            ],
-        ];
-
-        return $this->render('burger_show.html.twig', [
-            'burger' => $burgers[$id]
+        // Rendre la vue avec les burgers
+        return $this->render('burger/index.html.twig', [
+            'burgers' => $burgers,
         ]);
     }
 
+
+    #[Route('/burger/create', name: 'burger_create')]
+public function create(EntityManagerInterface $entityManager): Response
+{
+    $burger = new Burger();
+    $burger->setName('Krabby Patty'); // Exemple de valeur
+    $burger->setPrice(4.99); // Exemple de valeur
+    // ... (autres propriétés du burger)
+    $entityManager->persist($burger);
+    $entityManager->flush();
+    return new Response('Burger créé avec succès !');
+}
 }

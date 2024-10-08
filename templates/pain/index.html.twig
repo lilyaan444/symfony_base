@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des pains{% endblock %}
+{% block body %}
+    <h1>Liste des pains</h1>
+
+    <p>Vérification de la variable pains :</p>
+    {{ pains|length }} pains trouvés.
+
+    <ul>
+        {% for pain in pains %}
+            <li>{{ pain.name }}</li>
+        {% else %}
+            <li>Aucun pain trouvé.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

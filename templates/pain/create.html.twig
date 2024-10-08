@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un pain{% endblock %}
+
+{% block body %}
+    <h1>Pain créé avec succès !</h1>
+
+    <p>Le pain a été créé avec le nom : {{ pain.name }}</p>
+
+    <a href="{{ path('pain_index') }}">Retour à la liste des pains</a>
+{% endblock %}

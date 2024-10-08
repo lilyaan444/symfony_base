@@ -13,4 +13,9 @@ class HomeController extends AbstractController
     {
         return $this->render('home.html.twig');
     }
+    #[Route('/burgers', name: 'app_burgers_list')]
+    public function about(): Response
+    {
+        return $this->render('burgers_list.html.twig');
+    }
 }

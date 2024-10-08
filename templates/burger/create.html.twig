@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un burger{% endblock %}
+
+{% block body %}
+    <h1>Burger créé avec succès !</h1>
+
+    <p>Le burger a été créé avec le nom : {{ burger.name }}</p>
+
+    <a href="{{ path('burger_index') }}">Retour à la liste des pains</a>
+{% endblock %}

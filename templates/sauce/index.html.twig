@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des sauces{% endblock %}
+{% block body %}
+    <h1>Liste des sauces</h1>
+
+    <p>Vérification de la variable sauces :</p>
+    {{ sauces|length }} sauces trouvés.
+
+    <ul>
+        {% for sauce in sauces %}
+            <li>{{ sauce.name }}</li>
+        {% else %}
+            <li>Aucune sauce trouvé.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
