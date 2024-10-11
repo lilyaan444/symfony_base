@@ -1,0 +1,20 @@
+   {% extends 'base.html.twig' %}
+
+   {% block title %}Créer un nouveau burger{% endblock %}
+
+   {% block body %}
+       <h1>Créer un nouveau burger</h1>
+
+       {{ form_start(form) }}
+           {{ form_widget(form) }}
+           <button type="submit" class="btn btn-primary">Créer</button>
+       {{ form_end(form) }}
+<img id="image-preview" src="" style="max-width: 300px; max-height: 300px; display: block; margin: 0 auto;">
+
+
+
+
+
+   {% endblock %}
+
+

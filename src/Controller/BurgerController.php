@@ -8,6 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Burger;
+use App\Form\BurgerType;
+use Symfony\Component\HttpFoundation\Request; // Add this line
+
+
 
 
 class BurgerController extends AbstractController
@@ -34,6 +38,29 @@ public function create(EntityManagerInterface $entityManager): Response
     // ... (autres propriétés du burger)
     $entityManager->persist($burger);
     $entityManager->flush();
-    return new Response('Burger créé avec succès !');
+    return $this->render('burger/create.html.twig', [
+        'burger' => $burger,
+    ]);
 }
+
+#[Route('/burger/new', name: 'burger_new')]
+       public function new(Request $request, EntityManagerInterface $entityManager): Response
+       {
+           $burger = new Burger();
+           $form = $this->createForm(BurgerType::class, $burger);
+           $form->handleRequest($request);
+           if ($form->isSubmitted() && $form->isValid()) {
+               $entityManager->persist($burger);
+               $entityManager->flush();
+               $this->addFlash(
+                   'success',
+                   'Votre burger a été créé avec succès !'
+               );
+               return $this->redirectToRoute('burger_index');
+           }
+           return $this->render('burger/new.html.twig', [
+               'form' => $form->createView(),
+           ]);
+       }
+
 }

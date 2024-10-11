@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un sauce{% endblock %}
+
+{% block body %}
+    <h1>Sauce créé avec succès !</h1>
+
+    <p>La sauce a été créé avec le nom : {{ sauce.name }}</p>
+
+    <a href="{{ path('sauce_index') }}">Retour à la liste des sauces</a>
+{% endblock %}

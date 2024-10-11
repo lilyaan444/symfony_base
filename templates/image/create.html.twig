@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un image{% endblock %}
+
+{% block body %}
+    <h1>Image créé avec succès !</h1>
+
+    <p>L'image a été créé avec le nom : {{ image.name }}</p>
+
+    <a href="{{ path('image_index') }}">Retour à la liste des image</a>
+{% endblock %}

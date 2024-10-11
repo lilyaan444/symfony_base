@@ -32,6 +32,8 @@ public function create(EntityManagerInterface $entityManager): Response
     // ... (autres propriétés du commentaire)
     $entityManager->persist($commentaire);
     $entityManager->flush();
-    return new Response('Commentaire créé avec succès !');
+    return $this->render('commentaire/create.html.twig', [
+        'commentaire' => $commentaire,
+    ]);
 }
 }

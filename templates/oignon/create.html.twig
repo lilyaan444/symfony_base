@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un oignon{% endblock %}
+
+{% block body %}
+    <h1>Oignon créé avec succès !</h1>
+
+    <p>L'Oignon a été créé avec le nom : {{ oignon.name }}</p>
+
+    <a href="{{ path('oignon_index') }}">Retour à la liste des oignon</a>
+{% endblock %}

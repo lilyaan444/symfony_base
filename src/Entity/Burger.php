@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BurgerRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: BurgerRepository::class)]
@@ -22,19 +24,35 @@ class Burger
     #[ORM\ManyToOne(targetEntity: Pain::class)]
         private ?Pain $pain = null;
 
-        #[ORM\ManyToMany(targetEntity: Oignon::class)]
-        private ?Oignon $oignons = null;
+            /**
+     * @ORM\ManyToMany(targetEntity=Oignon::class, inversedBy="burgers")
+     */
+    private Collection $oignons;
 
-        #[ORM\ManyToMany(targetEntity: Sauce::class)]
-        private ?Sauce $sauces = null;
+         /**
+     * @ORM\ManyToMany(targetEntity=Sauce::class, inversedBy="burgers")
 
-        #[ORM\OneToOne(targetEntity: Image::class, cascade: ['persist', 'remove'])]
+*/
+    private Collection $sauces;
+
+
+
+        #[ORM\ManyToOne(targetEntity: Image::class)]
         private ?Image $image = null;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Commentaire::class, mappedBy="burger", orphanRemoval=true, inversedBy="commentaires")
      */
     private $commentaires;
+
+    public function __construct()
+    {
+        $this->oignons = new ArrayCollection();
+        $this->sauces = new ArrayCollection();
+
+
+    }
 
 
     public function getId(): ?int
@@ -78,18 +96,6 @@ class Burger
         return $this;
     }
 
-    public function getOignons(): ?Oignon
-    {
-        return $this->oignons;
-    }
-
-
-    public function getSauces(): ?Sauce
-    {
-        return $this->sauces;
-    }
-
-
     public function getImage(): ?Image
     {
         return $this->image;
@@ -107,33 +113,43 @@ class Burger
         return $this->commentaires;
     }
 
-    public function addOignon(?Oignon $oignon): static
+    /*
+    @return Collection<int, Sauce>
+     */
+    public function getSauces(): Collection
     {
-        if (!$this->oignons)
-        {
-            $this->oignons = array();
+        return $this->sauces;
+    }
+    public function addSauce(Sauce $sauce): self
+    {
+        if (!$this->sauces->contains($sauce)) {
+            $this->sauces->add($sauce);
         }
-
-        $this->oignons[] = $oignon;
-
+        return $this;
+    }
+    public function removeSauce(Sauce $sauce): self // Add this method
+    {
+        $this->sauces->removeElement($sauce);
         return $this;
     }
 
-    public function addSauce(?Sauce $sauce): static
+     /**
+     * @return Collection<int, Oignon>
+     */
+    public function getOignons(): Collection
     {
-        if (!$this->sauces)
-        {
-            $this->sauces = array();
+        return $this->oignons;
+    }
+    public function addOignon(Oignon $oignon): self
+    {
+        if (!$this->oignons->contains($oignon)) {
+            $this->oignons->add($oignon);
         }
-
-        $this->sauces[] = $sauce;
-
         return $this;
     }
-
-
-
-
-
-
+    public function removeOignon(Oignon $oignon): self
+    {
+        $this->oignons->removeElement($oignon);
+        return $this;
+    }
 }

@@ -30,6 +30,8 @@ public function create(EntityManagerInterface $entityManager): Response
     $image->setName('Nom de l\'image');
     $entityManager->persist($image);
     $entityManager->flush();
-    return new Response('Image créée avec succès !');
+    return $this->render('image/create.html.twig', [
+        'image' => $image,
+    ]);
 }
 }

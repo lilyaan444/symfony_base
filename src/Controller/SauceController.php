@@ -29,6 +29,8 @@ class SauceController extends AbstractController
         $sauce->setName('Sauce barbecue'); // Exemple de valeur
         $entityManager->persist($sauce);
         $entityManager->flush();
-        return new Response('Sauce créée avec succès !');
+        return $this->render('sauce/create.html.twig', [
+            'sauce' => $sauce,
+        ]);
     }
 }

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Créer un Nouveau Burger</h1>
+
+    {{ form_start(form) }}
+
+    {# Autres champs du formulaire... #}
+
+    <div data-controller="sauce">
+        {{ form_row(form.sauces) }}
+        <p data-sauce-target="selected">Sélectionnez une sauce</p>
+    </div>
+
+    <button type="submit">Créer</button>
+
+    {{ form_end(form) }}
+{% endblock %}

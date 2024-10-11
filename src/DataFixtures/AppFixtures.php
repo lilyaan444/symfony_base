@@ -35,19 +35,25 @@ class AppFixtures extends Fixture
 
         // Sauces
         $sauce1 = new Sauce();
+        $sauce1->setName('Sauce tomate');
+        $sauce1 = new Sauce();
         $sauce1->setName('Ketchup');
         $manager->persist($sauce1);
 
+        $sauce2 = new Sauce();
+        $sauce2->setName('Moutarde');
         $sauce2 = new Sauce();
         $sauce2->setName('Mayonnaise');
         $manager->persist($sauce2);
 
         // Images
         $image1 = new Image();
+        $image1->setName('Burger 1');
         $image1->setUrl('burger1.jpg');
         $manager->persist($image1);
 
         $image2 = new Image();
+        $image2->setName('Burger 2');
         $image2->setUrl('burger2.jpg');
         $manager->persist($image2);
 
@@ -57,9 +63,6 @@ class AppFixtures extends Fixture
         $burger1->setPain($pain1);
         $burger1->setImage($image1);
         $burger1->setPrice(999); // Prix en centimes
-        $burger1->addOignon($oignon1);
-        $burger1->addOignon($oignon2);
-        $burger1->addSauce($sauce1);
         $manager->persist($burger1);
 
         $burger2 = new Burger();
@@ -67,18 +70,18 @@ class AppFixtures extends Fixture
         $burger2->setPain($pain2);
         $burger2->setImage($image2);
         $burger2->setPrice(1099); // Prix en centimes
-        $burger2->addOignon($oignon2);
-        $burger2->addSauce($sauce2);
         $manager->persist($burger2);
 
         // Commentaires
         $commentaire1 = new Commentaire();
+        $commentaire1->setName("commentaire 1");
         $commentaire1->setBurger($burger1);
         $commentaire1->setAuteur('John Doe');
         $commentaire1->setContenu('Excellent burger !');
         $manager->persist($commentaire1);
 
         $commentaire2 = new Commentaire();
+        $commentaire2->setName("commentaire 2");
         $commentaire2->setBurger($burger2);
         $commentaire2->setAuteur('Jane Doe');
         $commentaire2->setContenu('Un peu cher mais très bon.');

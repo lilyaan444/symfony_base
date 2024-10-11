@@ -29,6 +29,8 @@ public function create(EntityManagerInterface $entityManager): Response
     $oignon->setName('Oignon rouge'); // Exemple de valeur
     $entityManager->persist($oignon);
     $entityManager->flush();
-    return new Response('Oignon créé avec succès !');
+    return $this->render('oignon/create.html.twig', [
+        'oignon' => $oignon,
+    ]);
 }
 }
